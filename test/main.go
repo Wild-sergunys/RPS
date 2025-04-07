@@ -63,6 +63,11 @@ func runInsertTests(db *sql.DB) {
 	for _, size := range sizes {
 		runInsertTest(db, size)
 	}
+	if err := testutils.ClearDatabase(db); err != nil {
+		log.Printf("Ошибка очистки базы после тестов сортировки: %v", err)
+	} else {
+		fmt.Println("\nБаза данных очищена после тестов сортировки")
+	}
 }
 
 func runInsertTest(db *sql.DB, count int) {
@@ -98,6 +103,11 @@ func runSortTests(db *sql.DB) {
 	dbSizes := []int{100, 1000, 10000}
 	for _, size := range dbSizes {
 		runSortTest(db, size)
+	}
+	if err := testutils.ClearDatabase(db); err != nil {
+		log.Printf("Ошибка очистки базы после тестов сортировки: %v", err)
+	} else {
+		fmt.Println("\nБаза данных очищена после тестов сортировки")
 	}
 }
 
